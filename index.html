@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+        overflow: hidden;
+        font-family: "Arial", sans-serif;
+        position: relative;
+      }
+
+      .container {
+        text-align: center;
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        max-width: 80%;
+      }
+
+      h1 {
+        font-size: 4em;
+        color: #ff5e78;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .nombre {
+        font-size: 6em;
+        font-weight: bold;
+        color: #6a5acd;
+        margin: 20px 0;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .mensaje {
+        font-size: 1.5em;
+        color: #333;
+        margin-top: 20px;
+      }
+
+      .flower {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        z-index: 1;
+      }
+
+      .petal {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ff69b4;
+        border-radius: 50%;
+      }
+
+      .center {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: #ffff00;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .button {
+        margin-top: 30px;
+        padding: 12px 25px;
+        background-color: #ff5e78;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #e83a5f;
+        transform: scale(1.05);
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>¡Feliz Cumpleaños!</h1>
+      <div class="nombre" id="nombrePersona">Deysi</div>
+      <div class="mensaje">
+        Que este día esté lleno de alegría, sonrisas y momentos inolvidables.
+      </div>
+      <button class="button" onclick="cambiarNombre()">Personalizar</button>
+    </div>
+
+    <script>
+      // Función para crear flores
+      function crearFlor() {
+        const flor = document.createElement("div");
+        flor.className = "flower";
+
+        // Posición aleatoria
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * window.innerHeight;
+        flor.style.left = posX + "px";
+        flor.style.top = posY + "px";
+
+        // Crear pétalos
+        for (let i = 0; i < 8; i++) {
+          const petalo = document.createElement("div");
+          petalo.className = "petal";
+
+          // Color aleatorio para los pétalos
+          const colores = [
+            "#FF69B4",
+            "#FF1493",
+            "#FFB6C1",
+            "#FFC0CB",
+            "#DB7093",
+          ];
+          const colorAleatorio =
+            colores[Math.floor(Math.random() * colores.length)];
+          petalo.style.backgroundColor = colorAleatorio;
+
+          // Posición de cada pétalo alrededor del centro
+          const angulo = (i / 8) * Math.PI * 2;
+          const x = Math.cos(angulo) * 15;
+          const y = Math.sin(angulo) * 15;
+          petalo.style.left = `calc(50% - 10px + ${x}px)`;
+          petalo.style.top = `calc(50% - 10px + ${y}px)`;
+
+          flor.appendChild(petalo);
+        }
+
+        // Crear centro de la flor
+        const centro = document.createElement("div");
+        centro.className = "center";
+        flor.appendChild(centro);
+
+        // Añadir animación
+        flor.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+        flor.style.animationDelay = `${Math.random() * 2}s`;
+
+        document.body.appendChild(flor);
+      }
+
+      // Crear varias flores
+      for (let i = 0; i < 15; i++) {
+        crearFlor();
+      }
+
+      // Función para cambiar el nombre
+      function cambiarNombre() {
+        const nombreNuevo = prompt("Ingresa el nombre de la persona:", "");
+        if (nombreNuevo !== null && nombreNuevo.trim() !== "") {
+          document.getElementById("nombrePersona").innerText = nombreNuevo;
+        }
+      }
+
+      // Permitir que se generen más flores al hacer clic en la pantalla
+      document.addEventListener("click", function (event) {
+        // Solo crear flores si se hace clic fuera del contenedor
+        if (!event.target.closest(".container")) {
+          const flor = document.createElement("div");
+          flor.className = "flower";
+          flor.style.left = event.clientX - 25 + "px";
+          flor.style.top = event.clientY - 25 + "px";
+
+          // Crear pétalos
+          for (let i = 0; i < 8; i++) {
+            const petalo = document.createElement("div");
+            petalo.className = "petal";
+
+            const colores = [
+              "#FF69B4",
+              "#FF1493",
+              "#FFB6C1",
+              "#FFC0CB",
+              "#DB7093",
+            ];
+            const colorAleatorio =
+              colores[Math.floor(Math.random() * colores.length)];
+            petalo.style.backgroundColor = colorAleatorio;
+
+            const angulo = (i / 8) * Math.PI * 2;
+            const x = Math.cos(angulo) * 15;
+            const y = Math.sin(angulo) * 15;
+            petalo.style.left = `calc(50% - 10px + ${x}px)`;
+            petalo.style.top = `calc(50% - 10px + ${y}px)`;
+
+            flor.appendChild(petalo);
+          }
+
+          const centro = document.createElement("div");
+          centro.className = "center";
+          flor.appendChild(centro);
+
+          flor.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+
+          document.body.appendChild(flor);
+        }
+      });
+    </script>
+  </body>
+</html>
