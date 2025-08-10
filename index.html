@@ -1,263 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños!</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
-
-        .container {
-            text-align: center;
-            z-index: 10;
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
-            margin: 20px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            color: #FF5E78;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .nombre {
-            font-size: 3.5em;
-            font-weight: bold;
-            color: #6A5ACD;
-            margin: 15px 0;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .mensaje {
-            font-size: 1.2em;
-            color: #333;
-            margin-top: 15px;
-        }
-
-        .flower {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            z-index: 1;
-        }
-
-        .petal {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #FF69B4;
-            border-radius: 50%;
-        }
-
-        .center {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #FFFF00;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(10deg);
-            }
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-        }
-
-        /* Media queries para responsividad */
-        @media screen and (max-width: 480px) {
-            h1 {
-                font-size: 2em;
-            }
-            
-            .nombre {
-                font-size: 2.8em;
-            }
-            
-            .mensaje {
-                font-size: 1em;
-            }
-            
-            .container {
-                padding: 20px;
-            }
-            
-            .flower {
-                width: 30px;
-                height: 30px;
-            }
-            
-            .petal {
-                width: 12px;
-                height: 12px;
-            }
-            
-            .center {
-                width: 10px;
-                height: 10px;
-            }
-        }
-        
-        @media screen and (max-width: 320px) {
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            .nombre {
-                font-size: 2.3em;
-            }
-            
-            .mensaje {
-                font-size: 0.9em;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soluciones Tecnológicas Zeta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-<body>
-    <div class="container">
-        <h1>¡Feliz Cumpleaños!</h1>
-        <div class="nombre">Deysi</div>
-        <div class="mensaje">Que este día esté lleno de alegría, sonrisas y momentos inolvidables.</div>
-    </div>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-    <script>
-        // Función para crear flores
-        function crearFlor() {
-            const flor = document.createElement('div');
-            flor.className = 'flower';
-            
-            // Posición aleatoria
-            const posX = Math.random() * window.innerWidth;
-            const posY = Math.random() * window.innerHeight;
-            flor.style.left = posX + 'px';
-            flor.style.top = posY + 'px';
-            
-            // Crear pétalos
-            for (let i = 0; i < 8; i++) {
-                const petalo = document.createElement('div');
-                petalo.className = 'petal';
-                
-                // Color aleatorio para los pétalos
-                const colores = ['#FF69B4', '#FF1493', '#FFB6C1', '#FFC0CB', '#DB7093'];
-                const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-                petalo.style.backgroundColor = colorAleatorio;
-                
-                // Posición de cada pétalo alrededor del centro
-                const angulo = (i / 8) * Math.PI * 2;
-                const x = Math.cos(angulo) * 15;
-                const y = Math.sin(angulo) * 15;
-                petalo.style.left = `calc(50% - 7.5px + ${x}px)`;
-                petalo.style.top = `calc(50% - 7.5px + ${y}px)`;
-                
-                flor.appendChild(petalo);
-            }
-            
-            // Crear centro de la flor
-            const centro = document.createElement('div');
-            centro.className = 'center';
-            flor.appendChild(centro);
-            
-            // Añadir animación
-            flor.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
-            flor.style.animationDelay = `${Math.random() * 2}s`;
-            
-            document.body.appendChild(flor);
-        }
-        
-        // Función para ajustar el número de flores según el tamaño de la pantalla
-        function ajustarFlores() {
-            // Eliminar flores existentes
-            const floresExistentes = document.querySelectorAll('.flower');
-            floresExistentes.forEach(flor => flor.remove());
-            
-            // Determinar número de flores basado en el ancho de la pantalla
-            let numeroFlores = 15;
-            if (window.innerWidth <= 768) {
-                numeroFlores = 10;
-            }
-            if (window.innerWidth <= 480) {
-                numeroFlores = 7;
-            }
-            
-            // Crear nuevas flores
-            for (let i = o; i < numeroFlores; i++) {
-                crearFlor();
-            }
-        }
-        
-        // Crear flores al cargar
-        window.addEventListener('load', function() {
-            // Crear flores iniciales
-            for (let i = 0; i < 15; i++) {
-                crearFlor();
-            }
-        });
-        
-        // Ajustar flores al redimensionar la ventana
-        window.addEventListener('resize', ajustarFlores);
-        
-        // Permitir que se generen más flores al hacer clic en la pantalla
-        document.addEventListener('click', function(event) {
-            // Solo crear flores si se hace clic fuera del contenedor
-            if (!event.target.closest('.container')) {
-                const flor = document.createElement('div');
-                flor.className = 'flower';
-                flor.style.left = (event.clientX - 20) + 'px';
-                flor.style.top = (event.clientY - 20) + 'px';
-                
-                // Crear pétalos
-                for (let i = 0; i < 8; i++) {
-                    const petalo = document.createElement('div');
-                    petalo.className = 'petal';
-                    
-                    const colores = ['#FF69B4', '#FF1493', '#FFB6C1', '#FFC0CB', '#DB7093'];
-                    const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-                    petalo.style.backgroundColor = colorAleatorio;
-                    
-                    const angulo = (i / 8) * Math.PI * 2;
-                    const x = Math.cos(angulo) * 12;
-                    const y = Math.sin(angulo) * 12;
-                    petalo.style.left = `calc(50% - 7.5px + ${x}px)`;
-                    petalo.style.top = `calc(50% - 7.5px + ${y}px)`;
-                    
-                    flor.appendChild(petalo);
-                }
-                
-                const centro = document.createElement('div');
-                centro.className = 'center';
-                flor.appendChild(centro);
-                
-                flor.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
-                
-                document.body.appendChild(flor);
-            }
-        });
-    </script>
+  <!-- Encabezado -->
+  <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-20 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 animate__animated animate__fadeInDown">
+      Soluciones Tecnológicas Zeta
+    </h1>
+    <p class="text-lg md:text-xl mb-6 animate__animated animate__fadeInUp">
+      Programación, análisis de datos y automatización a tu alcance
+    </p>
+    <a href="#contacto" class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-lg text-white text-lg font-medium animate__animated animate__pulse animate__infinite">
+      Solicita Asesoría
+    </a>
+  </header>
+
+  <!-- Servicios -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-center mb-12">Servicios</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold mb-3">💻 Programación</h3>
+        <p>Desarrollo de software a medida con las últimas tecnologías.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold mb-3">📊 Análisis Estadístico</h3>
+        <p>Transforma datos en decisiones con técnicas estadísticas avanzadas.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold mb-3">⚙️ Automatizaciones</h3>
+        <p>Scripts y procesos automáticos en Python para optimizar tu negocio.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold mb-3">🛠 Asesoría en Sistemas</h3>
+        <p>Consultoría y planificación de proyectos tecnológicos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre mí -->
+  <section class="bg-gray-200 py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-6">Sobre mí</h2>
+      <p class="text-lg">
+        Somos un equipo especializado en tecnología, programación y análisis de datos. 
+        Nuestra misión es llevar tus proyectos al siguiente nivel con soluciones personalizadas y efectivas.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-center mb-8">Contacto</h2>
+    <div class="bg-white p-8 rounded-2xl shadow-md">
+      <p class="mb-4">📧 Email: <a href="mailto:contacto@zeta.com" class="text-blue-600">contacto@zeta.com</a></p>
+      <p class="mb-6">💬 WhatsApp: <a href="https://wa.me/51999999999" target="_blank" class="text-blue-600">+51 999 999 999</a></p>
+      <form class="grid gap-4">
+        <input type="text" placeholder="Tu nombre" class="p-3 border rounded-lg">
+        <input type="email" placeholder="Tu correo" class="p-3 border rounded-lg">
+        <textarea placeholder="Tu mensaje" class="p-3 border rounded-lg"></textarea>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+          Enviar
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-4">
+    <p>© 2025 Soluciones Tecnológicas Zeta - Todos los derechos reservados</p>
+  </footer>
+
 </body>
 </html>
